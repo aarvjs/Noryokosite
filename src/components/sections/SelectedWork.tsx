@@ -4,7 +4,7 @@ import React from "react";
 import Link from "next/link";
 import PhoneFrame from "../devices/PhoneFrame";
 import LaptopFrame from "../devices/LaptopFrame";
-import { ArrowUpRight, CheckCircle2, Globe, ShieldCheck } from "lucide-react";
+import { ArrowUpRight, CheckCircle2, Globe } from "lucide-react";
 
 export default function SelectedWork() {
   return (
@@ -157,45 +157,6 @@ export default function SelectedWork() {
                 />
               </div>
             </PhoneFrame>
-          </div>
-        </div>
-
-        {/* Project 3: Enterprise Control Platform Banner */}
-        <div className="p-8 sm:p-12 rounded-3xl bg-slate-950 text-white border border-slate-800 shadow-2xl space-y-8">
-          <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-white/10 pb-6">
-            <div>
-              <span className="text-xs font-mono text-indigo-400 uppercase tracking-widest">
-                // ENTERPRISE CONTROL PLATFORM
-              </span>
-              <h3 className="text-3xl font-bold tracking-tight text-white mt-1">
-                Nexus AI Operating System
-              </h3>
-            </div>
-            <Link
-              href="/work/nexus-ai-operating-system"
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-indigo-600 hover:bg-indigo-500 text-white font-medium text-xs tracking-wider uppercase transition-colors"
-            >
-              <span>Explore Platform Case Study</span>
-              <ArrowUpRight className="w-3.5 h-3.5" />
-            </Link>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="p-6 rounded-2xl bg-white/5 border border-white/10">
-              <div className="text-xs font-mono text-slate-400">MICROSERVICES MANAGED</div>
-              <div className="text-3xl font-bold text-indigo-400 mt-2">1,240+</div>
-              <p className="text-xs text-slate-400 mt-2">Kubernetes pod clusters deployed across multi-cloud regions.</p>
-            </div>
-            <div className="p-6 rounded-2xl bg-white/5 border border-white/10">
-              <div className="text-xs font-mono text-slate-400">WEBSOCKET STREAM</div>
-              <div className="text-3xl font-bold text-emerald-400 mt-2">&lt; 5ms</div>
-              <p className="text-xs text-slate-400 mt-2">Real-time metric telemetry streamed to browser canvas.</p>
-            </div>
-            <div className="p-6 rounded-2xl bg-white/5 border border-white/10">
-              <div className="text-xs font-mono text-slate-400">SYSTEM AVAILABILITY</div>
-              <div className="text-3xl font-bold text-blue-400 mt-2">99.99%</div>
-              <p className="text-xs text-slate-400 mt-2">High availability with automated disaster failover gates.</p>
-            </div>
           </div>
         </div>
       </div>

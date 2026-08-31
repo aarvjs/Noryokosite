@@ -1,123 +1,173 @@
 "use client";
 
-import React from "react";
-import { CheckCircle, ShieldCheck } from "lucide-react";
+import React, { useState } from "react";
+import {
+  CheckCircle,
+  Cpu,
+  FileCode,
+  Layout,
+  Rocket,
+  Search,
+  ShieldCheck
+} from "lucide-react";
 
-interface ProcessStep {
+interface ProcessPhase {
   number: string;
   title: string;
   subtitle: string;
   description: string;
+  icon: React.ElementType;
   deliverables: string[];
 }
 
-const PROCESS_STEPS: ProcessStep[] = [
+const METHODOLOGY_PHASES: ProcessPhase[] = [
   {
     number: "01",
     title: "DISCOVER",
-    subtitle: "Domain Audit & Technical Blueprint",
-    description: "We map business domain constraints, data schemas, API boundaries, security requirements, and operational goals before writing a single line of code.",
-    deliverables: ["Technical Architecture Specification", "Data Model Schemas", "Security & Risk Matrix"]
+    subtitle: "System Audit & Domain Mapping",
+    description: "Mapping business domain constraints, data schemas, API boundaries, security rules, and operational requirements.",
+    icon: Search,
+    deliverables: ["Architecture Specification", "Data Model Schemas", "Security Matrix"]
   },
   {
     number: "02",
-    title: "DESIGN",
-    subtitle: "Editorial UX & Design Systems",
-    description: "Crafting tokenized component libraries in Figma, responsive UI layouts, micro-animations, and high-fidelity clickable user flows.",
-    deliverables: ["Tokenized Figma Design System", "Interactive Clickable Prototypes", "Design Token Specs"]
+    title: "DEFINE",
+    subtitle: "Technical Architecture & Schemas",
+    description: "Defining microservice contracts, database migration scripts, state topology, and cloud VPC networks.",
+    icon: FileCode,
+    deliverables: ["OpenAPI Contracts", "Postgres Schemas", "VPC Topology"]
   },
   {
     number: "03",
-    title: "ENGINEER",
-    subtitle: "Modular Core System Engineering",
-    description: "Test-driven development of full-stack applications, microservices, Next.js frontend components, and database migrations.",
-    deliverables: ["Modular Source Codebase", "REST / GraphQL API Contracts", "Database Migration Scripts"]
+    title: "DESIGN",
+    subtitle: "Bespoke UI/UX & Design Tokens",
+    description: "Crafting tokenized component design systems in Figma, responsive UI layouts, and interactive prototypes.",
+    icon: Layout,
+    deliverables: ["Tokenized Design Specs", "Figma Design System", "Interactive UX"]
   },
   {
     number: "04",
-    title: "TEST",
-    subtitle: "Automated QA & Security Audits",
-    description: "Rigorous automated integration tests, OWASP security audits, load testing under high concurrency, and Core Web Vitals optimization.",
-    deliverables: ["Automated Test Suite Coverage", "Security Vulnerability Scan", "Lighthouse 95+ Audit Report"]
+    title: "BUILD",
+    subtitle: "Sprint Engineering & Code Review",
+    description: "Test-driven development of full-stack Next.js web applications, Flutter mobile binaries, and API microservices.",
+    icon: Cpu,
+    deliverables: ["Modular Source Code", "Next.js App Router", "Flutter Mobile Binary"]
   },
   {
     number: "05",
-    title: "DEPLOY",
-    subtitle: "CI/CD & Cloud Orchestration",
-    description: "Zero-downtime blue-green deployments on AWS / GCP using Terraform Infrastructure as Code and automated container pipelines.",
-    deliverables: ["Version-Controlled Terraform IaC", "Automated CI/CD Pipelines", "Telemetry Monitoring Dashboards"]
+    title: "TEST",
+    subtitle: "QA, Penetration Audit & Stress Test",
+    description: "Automated integration suites, OWASP vulnerability scans, load testing under high concurrency, and speed audits.",
+    icon: ShieldCheck,
+    deliverables: ["Automated Test Coverage", "OWASP Security Scan", "Lighthouse 95+ Score"]
   },
   {
     number: "06",
-    title: "GROW",
-    subtitle: "Continuous Optimization & Scaling",
-    description: "Post-launch monitoring, real-time APM telemetry, feature enhancements, and technical SEO scaling for ongoing market expansion.",
-    deliverables: ["24/7 Telemetry Alert Triggers", "Monthly Performance Reports", "SLA Maintenance Support"]
+    title: "DEPLOY",
+    subtitle: "Zero-Downtime Launch & SLA Telemetry",
+    description: "Zero-downtime blue-green deployments on AWS using Terraform Infrastructure as Code and automated CI/CD.",
+    icon: Rocket,
+    deliverables: ["Terraform IaC Scripts", "Automated CI/CD", "24/7 APM Telemetry"]
   }
 ];
 
 export default function ProcessSection() {
+  const [activePhase, setActivePhase] = useState<number>(0);
+
   return (
-    <section className="w-full py-24 sm:py-32 bg-[#0B0F19] text-white border-b border-white/10">
+    <section className="w-full py-24 sm:py-32 bg-[#FAF8F5] text-slate-900 border-b border-amber-200/80">
       <div className="max-w-7xl mx-auto px-4 sm:px-8 space-y-16">
+        
         {/* Section Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between border-b border-white/10 pb-8">
+        <div className="flex flex-col md:flex-row md:items-end justify-between border-b border-amber-200/60 pb-8">
           <div>
-            <span className="text-xs font-mono tracking-widest text-indigo-400 uppercase">
-              // Methodology & Workflow
+            <span className="text-xs font-mono tracking-widest text-amber-800 font-bold uppercase">
+              // METHODOLOGY & WORKFLOW
             </span>
-            <h2 className="text-3xl sm:text-5xl font-bold tracking-tight text-white mt-2">
+            <h2 className="text-3xl sm:text-5xl font-bold tracking-tight text-slate-900 mt-2">
               HOW WE ENGINEER
             </h2>
           </div>
-          <p className="text-slate-400 text-sm max-w-md mt-4 md:mt-0 font-light leading-relaxed">
+          <p className="text-slate-600 text-sm max-w-md mt-4 md:mt-0 font-light leading-relaxed">
             A disciplined six-phase engineering pipeline designed for predictable delivery, zero technical debt, and maximum reliability.
           </p>
         </div>
 
-        {/* Editorial Vertical Staggered Process List */}
-        <div className="space-y-12">
-          {PROCESS_STEPS.map((step, idx) => (
-            <div
-              key={step.number}
-              className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start p-8 rounded-3xl bg-white/5 border border-white/10 hover:border-white/20 transition-all hover:bg-white/10 group"
-            >
-              {/* Step Number & Title */}
-              <div className="lg:col-span-5 flex items-start gap-6">
-                <span className="text-4xl sm:text-6xl font-bold font-mono text-indigo-400 group-hover:scale-105 transition-transform">
-                  {step.number}
-                </span>
-                <div>
-                  <h3 className="text-2xl sm:text-3xl font-bold tracking-tight text-white">
-                    {step.title}
-                  </h3>
-                  <p className="text-xs font-mono text-indigo-300 mt-1">
-                    {step.subtitle}
+        {/* Clean Editorial Engineering Phase Grid (No horizontal line behind cards!) */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-4">
+          {METHODOLOGY_PHASES.map((phase, idx) => {
+            const Icon = phase.icon;
+            const isActive = activePhase === idx;
+
+            return (
+              <div
+                key={phase.number}
+                onClick={() => setActivePhase(idx)}
+                onMouseEnter={() => setActivePhase(idx)}
+                className={`p-6 rounded-3xl border text-left transition-all duration-300 flex flex-col justify-between h-[300px] cursor-pointer group ${
+                  isActive
+                    ? "bg-white border-amber-400 shadow-[0_15px_35px_rgba(217,119,6,0.14)] scale-105"
+                    : "bg-white/80 border-amber-200/60 hover:bg-white hover:border-amber-300"
+                }`}
+              >
+                <div className="space-y-3">
+                  <div className="flex items-center justify-between border-b border-amber-100 pb-2">
+                    <span className={`text-2xl font-mono font-bold ${isActive ? "text-amber-800" : "text-slate-400"}`}>
+                      {phase.number}
+                    </span>
+                    <div className={`p-2 rounded-xl transition-colors ${isActive ? "bg-amber-700 text-white" : "bg-amber-50 text-amber-800"}`}>
+                      <Icon className="w-4 h-4" />
+                    </div>
+                  </div>
+
+                  <div className="text-base font-bold text-slate-900 group-hover:text-amber-900 transition-colors">
+                    {phase.title}
+                  </div>
+                  <div className="text-[10px] font-mono text-amber-800 font-medium line-clamp-1">
+                    {phase.subtitle}
+                  </div>
+                  <p className="text-[11px] text-slate-600 font-light leading-relaxed line-clamp-3">
+                    {phase.description}
                   </p>
                 </div>
-              </div>
 
-              {/* Description & Deliverables */}
-              <div className="lg:col-span-7 space-y-4">
-                <p className="text-slate-300 text-sm leading-relaxed font-light">
-                  {step.description}
-                </p>
-
-                <div className="pt-2 border-t border-white/10">
-                  <span className="text-xs font-mono text-slate-400 block mb-2">Phase Deliverables:</span>
-                  <div className="flex flex-wrap gap-3">
-                    {step.deliverables.map((deliv, i) => (
-                      <div key={i} className="flex items-center gap-1.5 text-xs text-slate-200 bg-white/5 px-3 py-1 rounded-full border border-white/10">
-                        <CheckCircle className="w-3.5 h-3.5 text-indigo-400" />
-                        <span>{deliv}</span>
-                      </div>
-                    ))}
-                  </div>
+                <div className="pt-2 border-t border-amber-100 flex items-center justify-between text-[9px] font-mono text-slate-500">
+                  <span>{phase.deliverables[0]}</span>
+                  <span className="text-amber-700 font-bold">✓</span>
                 </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
+
+        {/* Active Phase Specification Card */}
+        <div className="p-8 rounded-3xl bg-white border border-amber-200/80 shadow-[0_10px_30px_rgba(217,119,6,0.06)] space-y-4">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-amber-100 pb-3">
+            <div className="flex items-center gap-3">
+              <span className="text-xs font-mono px-3.5 py-1 rounded-full bg-amber-100/90 text-amber-900 font-bold border border-amber-300/60 uppercase">
+                PHASE {METHODOLOGY_PHASES[activePhase].number} — {METHODOLOGY_PHASES[activePhase].title}
+              </span>
+              <span className="text-sm font-bold text-slate-900">
+                {METHODOLOGY_PHASES[activePhase].subtitle}
+              </span>
+            </div>
+            <span className="text-xs font-mono text-emerald-700 font-bold">PRODUCTION GRADE SLA ✓</span>
+          </div>
+
+          <p className="text-slate-600 text-sm font-light leading-relaxed">
+            {METHODOLOGY_PHASES[activePhase].description}
+          </p>
+
+          <div className="pt-2 flex flex-wrap gap-3">
+            {METHODOLOGY_PHASES[activePhase].deliverables.map((deliv, i) => (
+              <div key={i} className="flex items-center gap-2 text-xs font-mono text-amber-900 bg-amber-50 px-3.5 py-1.5 rounded-xl border border-amber-200/80 font-medium">
+                <CheckCircle className="w-3.5 h-3.5 text-amber-700" />
+                <span>{deliv}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+
       </div>
     </section>
   );

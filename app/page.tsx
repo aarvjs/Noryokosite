@@ -6,7 +6,6 @@ import PinnedProductShowcase from "@/components/sections/PinnedProductShowcase";
 import SelectedWork from "@/components/sections/SelectedWork";
 import ProcessSection from "@/components/sections/ProcessSection";
 import IndustriesSection from "@/components/sections/IndustriesSection";
-import InternshipSection from "@/components/sections/InternshipSection";
 import FinalCTA from "@/components/sections/FinalCTA";
 
 export const metadata = {
@@ -24,7 +23,6 @@ export default function HomePage() {
       <SelectedWork />
       <ProcessSection />
       <IndustriesSection />
-      <InternshipSection />
       <FinalCTA />
     </main>
   );

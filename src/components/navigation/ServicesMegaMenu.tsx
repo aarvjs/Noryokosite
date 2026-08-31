@@ -73,41 +73,41 @@ export default function ServicesMegaMenu({ onClose, onMouseEnter, onMouseLeave }
     <div
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
-      className="absolute top-full left-1/2 -translate-x-1/2 mt-3 w-[860px] max-w-[92vw] p-6 rounded-3xl bg-[#090D16]/98 text-white shadow-[0_30px_80px_rgba(0,0,0,0.85)] border border-white/20 backdrop-blur-2xl animate-in fade-in slide-in-from-top-2 duration-200 z-50 pointer-events-auto"
+      className="absolute top-full left-1/2 -translate-x-1/2 mt-3 w-[860px] max-w-[92vw] p-6 rounded-3xl bg-[#FAF8F5]/98 text-slate-900 shadow-[0_20px_50px_rgba(217,119,6,0.12)] border border-amber-200/80 backdrop-blur-2xl animate-in fade-in slide-in-from-top-2 duration-200 z-50 pointer-events-auto"
     >
       {/* Invisible hover bridge to prevent mouse leave gap */}
       <div className="absolute -top-4 left-0 right-0 h-4" />
 
       <div className="flex flex-col lg:flex-row gap-6 items-stretch">
         {/* LEFT SIDE (40% Width): Large Software Preview Image Card */}
-        <div className="w-full lg:w-[330px] shrink-0 relative rounded-2xl overflow-hidden min-h-[300px] border border-white/15 flex flex-col justify-end p-5 group">
+        <div className="w-full lg:w-[330px] shrink-0 relative rounded-2xl overflow-hidden min-h-[300px] border border-amber-200/60 flex flex-col justify-end p-5 group shadow-sm">
           {/* Background Image */}
           <img
             src={activePreview.image}
             alt={activePreview.title}
             className="absolute inset-0 w-full h-full object-cover transition-all duration-500 scale-105 group-hover:scale-110"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#090D16] via-[#090D16]/75 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#FAF8F5] via-[#FAF8F5]/85 to-transparent" />
 
           {/* Content Overlay */}
           <div className="relative z-10 space-y-2">
-            <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-indigo-600/90 text-white text-[9px] font-mono uppercase tracking-widest border border-indigo-400/40 shadow-sm">
-              <Sparkles className="w-3 h-3 text-indigo-200" />
+            <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-amber-100/90 text-amber-900 text-[9px] font-mono uppercase tracking-widest border border-amber-300/60 shadow-sm font-bold">
+              <Sparkles className="w-3 h-3 text-amber-700" />
               <span>{activePreview.tag}</span>
             </div>
 
-            <h4 className="text-base font-bold tracking-tight text-white leading-snug">
+            <h4 className="text-base font-bold tracking-tight text-slate-900 leading-snug">
               {activePreview.title}
             </h4>
 
-            <p className="text-xs text-slate-300 font-light leading-relaxed line-clamp-2">
+            <p className="text-xs text-slate-600 font-light leading-relaxed line-clamp-2">
               {activePreview.desc}
             </p>
 
             {/* Tech Badges */}
             <div className="flex flex-wrap gap-1.5 pt-1.5">
               {activePreview.tech.map((t) => (
-                <span key={t} className="text-[9px] font-mono px-2 py-0.5 rounded bg-white/10 text-indigo-200 border border-white/15">
+                <span key={t} className="text-[9px] font-mono px-2 py-0.5 rounded bg-white/90 text-amber-900 border border-amber-200/60 font-medium">
                   {t}
                 </span>
               ))}
@@ -130,32 +130,34 @@ export default function ServicesMegaMenu({ onClose, onMouseEnter, onMouseLeave }
                 onMouseEnter={() => setActiveSlug(slug)}
                 className={`p-3.5 rounded-2xl transition-all flex flex-col justify-between group border ${
                   isActive
-                    ? "bg-indigo-600/20 border-indigo-500/60 shadow-lg shadow-indigo-600/20 scale-[1.02]"
-                    : "bg-white/5 border-white/10 hover:bg-white/10 hover:border-white/20"
+                    ? "bg-amber-100/90 border-amber-400 shadow-md shadow-amber-500/10 scale-[1.02]"
+                    : "bg-white border-amber-200/60 hover:bg-amber-50/80 hover:border-amber-300"
                 }`}
               >
                 <div className="flex items-start justify-between gap-2">
                   <div className="flex items-center gap-2.5">
                     <div
                       className={`p-2 rounded-xl transition-colors ${
-                        isActive ? "bg-indigo-600 text-white shadow-md shadow-indigo-600/40" : "bg-white/10 text-slate-300 group-hover:text-white group-hover:bg-indigo-600/80"
+                        isActive
+                          ? "bg-amber-700 text-white shadow-sm"
+                          : "bg-amber-50 text-amber-800 group-hover:bg-amber-700 group-hover:text-white"
                       }`}
                     >
                       <Icon className="w-4 h-4" />
                     </div>
-                    <span className={`text-xs font-bold transition-colors ${isActive ? "text-white" : "text-slate-200 group-hover:text-white"}`}>
+                    <span className={`text-xs font-bold transition-colors ${isActive ? "text-slate-900" : "text-slate-700 group-hover:text-slate-900"}`}>
                       {item.label}
                     </span>
                   </div>
                   <ArrowUpRight
                     className={`w-3.5 h-3.5 transition-transform ${
-                      isActive ? "text-indigo-400 translate-x-0.5 -translate-y-0.5 opacity-100" : "text-slate-500 opacity-0 group-hover:opacity-100"
+                      isActive ? "text-amber-800 translate-x-0.5 -translate-y-0.5 opacity-100" : "text-slate-400 opacity-0 group-hover:opacity-100"
                     }`}
                   />
                 </div>
 
                 {item.description && (
-                  <p className="text-[11px] text-slate-300 line-clamp-2 mt-2 font-light leading-relaxed">
+                  <p className="text-[11px] text-slate-600 line-clamp-2 mt-2 font-light leading-relaxed">
                     {item.description}
                   </p>
                 )}

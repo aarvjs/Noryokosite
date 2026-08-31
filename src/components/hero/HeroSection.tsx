@@ -1,9 +1,9 @@
 "use client";
 
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import ThreePhonesFrame from "../devices/ThreePhonesFrame";
-import { MapPin, ShieldCheck, Sparkles } from "lucide-react";
+import { MapPin } from "lucide-react";
 
 // SVG Icon definitions for Social Media Group
 function InstagramIcon({ className = "w-4 h-4" }: { className?: string }) {
@@ -66,16 +66,31 @@ const SOCIAL_LINKS = [
 ];
 
 export default function HeroSection() {
+  const [scrolledPastHero, setScrolledPastHero] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 450) {
+        setScrolledPastHero(true);
+      } else {
+        setScrolledPastHero(false);
+      }
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
-    <section className="relative w-full min-h-screen flex flex-col justify-between bg-[#0B0F19] text-white overflow-hidden pt-28 pb-8 px-4 sm:px-8">
-      {/* Background CloudFront Video — Natural Video Colors */}
-      <div className="absolute inset-0 z-0 overflow-hidden">
+    <section className="relative w-full min-h-screen flex flex-col justify-between bg-[#0A0D14] text-white overflow-hidden pt-28 pb-8 px-4 sm:px-8">
+      {/* Background Video Layer — Instant Video Preload & Rendering (Zero Dark Blue Flash) */}
+      <div className="absolute inset-0 z-0 overflow-hidden bg-[#0A0D14]">
         <video
           autoPlay
           muted
           loop
           playsInline
-          className="w-full h-full object-cover opacity-75 scale-105"
+          preload="auto"
+          className="w-full h-full object-cover opacity-75 scale-105 transition-opacity duration-300"
         >
           <source
             src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260808_075824_7c8a2ef3-826c-43ca-81a1-162429faa306.mp4"
@@ -84,14 +99,12 @@ export default function HeroSection() {
           <source src="/heosection.mp4" type="video/mp4" />
         </video>
 
-        {/* Subtle Neutral Dark Overlay (NO BLUE FILTER) */}
+        {/* Subtle Neutral Overlay */}
         <div className="absolute inset-0 hero-video-overlay" />
       </div>
 
-      {/* Left-Side Lucknow Software Company Blue-White Badge Card */}
-      {/* Home Hero Only — White Frosted Glass Card */}
+      {/* Left-Side Lucknow Software Company Badge Card */}
       <div className="absolute left-3 sm:left-16 top-[72%] -translate-y-1/2 z-30 hidden lg:flex w-[240px] flex-col p-4 rounded-2xl bg-white/15 text-white backdrop-blur-xl border border-white/30 shadow-[0_10px_40px_rgba(255,255,255,0.18)] text-left gap-2">
-
         <div className="flex items-center gap-2 text-[9px] font-mono font-semibold uppercase tracking-widest text-white/80">
           <MapPin className="w-3.5 h-3.5" />
           <span>LUCKNOW, INDIA</span>
@@ -112,8 +125,8 @@ export default function HeroSection() {
         </span>
       </div>
 
-      {/* Right-Side Vertical Social Media Icon Bar */}
-      <div className="fixed right-3 sm:right-6 top-1/2 -translate-y-1/2 z-30 hidden sm:flex flex-col items-center gap-3">
+      {/* Right-Side Vertical Social Media Icon Bar — Adaptive Color */}
+      <div className="fixed right-3 sm:right-6 top-1/2 -translate-y-1/2 z-40 hidden sm:flex flex-col items-center gap-3 transition-all duration-300">
         {SOCIAL_LINKS.map((item) => {
           const Icon = item.icon;
           return (
@@ -123,7 +136,11 @@ export default function HeroSection() {
               target="_blank"
               rel="noopener noreferrer"
               aria-label={item.name}
-              className="w-9 h-9 rounded-full bg-white/10 hover:bg-indigo-600 text-slate-300 hover:text-white border border-white/15 backdrop-blur-md flex items-center justify-center transition-all duration-300 hover:scale-110 shadow-sm"
+              className={`w-9 h-9 rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110 shadow-sm ${
+                scrolledPastHero
+                  ? "bg-white text-slate-800 border border-amber-300/80 shadow-md hover:bg-amber-600 hover:text-white hover:border-amber-500"
+                  : "bg-white/10 text-white border border-white/15 backdrop-blur-md hover:bg-amber-600 hover:text-white hover:border-amber-500"
+              }`}
             >
               <Icon className="w-4 h-4" />
             </a>
@@ -133,14 +150,14 @@ export default function HeroSection() {
 
       {/* Main Centered Hero Content Container */}
       <div className="relative z-20 max-w-5xl mx-auto w-full flex-1 flex flex-col justify-center items-center py-6 text-center space-y-6">
-        {/* Top-Centered NORYOKO Clean Wordmark Branding (No Duplicate Icon) */}
+        {/* Top-Centered NORYOKO Clean Wordmark Branding */}
         <div className="flex flex-col items-center space-y-2">
           <h1 className="text-4xl sm:text-6xl font-extrabold tracking-widest text-white font-mono uppercase">
             NORYOKO
           </h1>
 
           {/* Subtitle */}
-          <div className="text-xs sm:text-sm font-mono tracking-widest text-indigo-400 font-bold uppercase pt-1">
+          <div className="text-xs sm:text-sm font-mono tracking-widest text-amber-400 font-bold uppercase pt-1">
             DIGITAL SOFTWARE & TECHNOLOGY COMPANY
           </div>
         </div>
@@ -150,7 +167,7 @@ export default function HeroSection() {
           We design and build software, websites, mobile apps and digital solutions for modern businesses.
         </p>
 
-        {/* 3-Phone Smartphone Stack Showcase (Middle phone always in front) */}
+        {/* 3-Phone Smartphone Stack Showcase */}
         <div className="w-full pt-2">
           <ThreePhonesFrame />
         </div>

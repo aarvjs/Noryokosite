@@ -11,7 +11,7 @@ export const MAIN_NAVIGATION: NavItem[] = [
   { label: "About", href: "/about" },
   { label: "Services", href: "/services" },
   { label: "Internships", href: "/internships" },
-  { label: "FAQ", href: "/#faq" },
+  { label: "FAQ", href: "/faq" },
   { label: "Contact", href: "/contact" },
 ];
 
@@ -66,6 +66,7 @@ export const FOOTER_NAVIGATION = {
     { label: "Services", href: "/services" },
     { label: "Careers", href: "/careers" },
     { label: "Internships", href: "/internships" },
+    { label: "FAQ", href: "/faq" },
     { label: "Contact Us", href: "/contact" },
   ],
   resources: [

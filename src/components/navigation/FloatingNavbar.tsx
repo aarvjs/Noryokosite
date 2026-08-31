@@ -15,6 +15,8 @@ export default function FloatingNavbar() {
   const closeTimerRef = useRef<NodeJS.Timeout | null>(null);
   const pathname = usePathname();
 
+  const isLightPage = pathname !== "/" && pathname !== "/home";
+
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > 30) {
@@ -47,18 +49,18 @@ export default function FloatingNavbar() {
         {/* Main Floating Pill Container */}
         <div
           className={`pointer-events-auto relative flex items-center justify-between gap-6 px-6 py-3 rounded-full transition-all duration-300 ${
-            scrolled
-              ? "bg-[#0B0F19]/90 text-white backdrop-blur-xl border border-white/15 w-full max-w-5xl py-2.5 shadow-2xl"
+            scrolled || isLightPage
+              ? "bg-[#FAF8F5]/90 text-slate-900 backdrop-blur-xl border border-amber-200/80 w-full max-w-5xl py-2.5 shadow-[0_10px_30px_rgba(217,119,6,0.1)]"
               : "bg-transparent text-white border-0 shadow-none w-full max-w-6xl"
           }`}
         >
           {/* Brand Logo */}
           <Link href="/" className="flex items-center gap-2 font-bold tracking-tight text-lg group">
-            <div className="w-7 h-7 rounded-full bg-indigo-600 flex items-center justify-center text-white text-xs font-mono font-bold group-hover:scale-105 transition-transform shadow-sm">
+            <div className="w-7 h-7 rounded-full bg-amber-700 flex items-center justify-center text-white text-xs font-mono font-bold group-hover:scale-105 transition-transform shadow-sm">
               N
             </div>
-            <span className="font-bold tracking-tight text-lg text-white">
-              NORYOKO<span className="text-indigo-400">.</span>
+            <span className={`font-bold tracking-tight text-lg transition-colors ${scrolled || isLightPage ? "text-slate-900" : "text-white"}`}>
+              NORYOKO<span className={scrolled || isLightPage ? "text-amber-700" : "text-amber-400"}>.</span>
             </span>
           </Link>
 
@@ -78,9 +80,11 @@ export default function FloatingNavbar() {
                     href={item.href}
                     className={`flex items-center gap-1 px-4 py-2 rounded-full text-xs font-medium tracking-wide transition-all ${
                       isActive
-                        ? "bg-white/20 text-white font-semibold"
-                        : scrolled
-                        ? "text-slate-300 hover:text-white hover:bg-white/10"
+                        ? scrolled || isLightPage
+                          ? "bg-amber-200/80 text-slate-900 font-bold"
+                          : "bg-white/20 text-white font-semibold"
+                        : scrolled || isLightPage
+                        ? "text-slate-700 hover:text-slate-900 hover:bg-amber-100/60"
                         : "text-white/90 hover:text-white hover:bg-white/15"
                     }`}
                   >
@@ -97,9 +101,9 @@ export default function FloatingNavbar() {
             <Link
               href="/contact"
               className={`btn-water-fill flex items-center gap-1.5 px-6 py-2 rounded-full text-xs font-semibold tracking-wide transition-all shadow-sm ${
-                scrolled
-                  ? "bg-indigo-600 text-white shadow-indigo-600/20"
-                  : "bg-white text-slate-950 hover:bg-slate-100 shadow-lg"
+                scrolled || isLightPage
+                  ? "bg-amber-700 text-white hover:bg-amber-800 shadow-amber-700/20"
+                  : "bg-amber-600 text-white hover:bg-amber-500 shadow-lg shadow-amber-600/30"
               }`}
             >
               <div className="btn-water-bg" />
@@ -111,14 +115,18 @@ export default function FloatingNavbar() {
           {/* Mobile Menu Trigger */}
           <button
             onClick={() => setMobileMenuOpen(true)}
-            className="md:hidden p-2 rounded-full border border-white/15 text-white hover:bg-white/10 transition-colors"
+            className={`md:hidden p-2 rounded-full border transition-colors ${
+              scrolled || isLightPage
+                ? "border-amber-300 text-slate-900 hover:bg-amber-100/60"
+                : "border-white/15 text-white hover:bg-white/10"
+            }`}
             aria-label="Open navigation menu"
           >
             <Menu className="w-5 h-5" />
           </button>
         </div>
 
-        {/* Services Mega Menu Dropdown (Centered Header Level Position) */}
+        {/* Services Mega Menu Dropdown */}
         {servicesOpen && (
           <div
             className="relative w-full flex justify-center pointer-events-auto"

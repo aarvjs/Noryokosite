@@ -1,12 +1,26 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import PhoneFrame from "./PhoneFrame";
-import { Activity, Bell, ChevronRight, Clock, Heart, Home, Search, ShieldCheck, ShoppingBag, Sparkles, Star, User, Wallet, Zap } from "lucide-react";
+import { Activity, Bell, ChevronRight, Clock, Heart, Home, Search, ShieldCheck, ShoppingBag, User, Wallet } from "lucide-react";
 
 export default function ThreePhonesFrame() {
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    // Fast, smooth spring animation on page load, refresh or navigation back
+    const timer = setTimeout(() => {
+      setMounted(true);
+    }, 60);
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
-    <div className="relative w-full max-w-2xl mx-auto h-[400px] sm:h-[460px] flex items-center justify-center my-2 overflow-visible">
+    <div
+      className={`relative w-full max-w-2xl mx-auto h-[400px] sm:h-[460px] flex items-center justify-center my-2 overflow-visible transition-all duration-700 ease-out transform ${
+        mounted ? "translate-y-0 opacity-100 scale-100" : "translate-y-16 opacity-0 scale-95"
+      }`}
+    >
       {/* Phone 1: Left Phone (Slightly Behind - z-10 max z-20) */}
       <div className="absolute left-1 sm:left-4 top-8 sm:top-10 z-10 scale-90 sm:scale-95 opacity-90 -rotate-6 transition-all duration-500 hover:scale-100 hover:z-20 hover:opacity-100">
         <PhoneFrame className="max-w-[195px] sm:max-w-[235px]">

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import FloatingNavbar from "@/components/navigation/FloatingNavbar";
+import MobileFloatingCTA from "@/components/common/MobileFloatingCTA";
 import SmoothScroll from "@/components/layout/SmoothScroll";
 import Footer from "@/components/layout/Footer";
 
@@ -30,10 +31,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col bg-[#F9F9FB] text-slate-900 selection:bg-indigo-500 selection:text-white">
+      <body className="min-h-full flex flex-col bg-[#FAF8F5] text-slate-900 selection:bg-amber-600 selection:text-white">
         <SmoothScroll>
           <FloatingNavbar />
           <div className="flex-1">{children}</div>
+          <MobileFloatingCTA />
           <Footer />
         </SmoothScroll>
       </body>
