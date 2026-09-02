@@ -16,7 +16,7 @@ export default function MobileFloatingCTA() {
     <div className="fixed bottom-6 right-4 z-40 flex flex-col gap-3 md:hidden pointer-events-auto">
       {/* Phone Call Floating CTA Button */}
       <a
-        href="tel:+919876543210"
+        href="tel:+918800185776"
         aria-label="Call NORYOKO Engineering Studio"
         className="w-11 h-11 rounded-full bg-white text-amber-800 border border-amber-300 shadow-[0_8px_20px_rgba(217,119,6,0.22)] flex items-center justify-center transition-transform active:scale-90 hover:scale-105"
       >
@@ -25,7 +25,7 @@ export default function MobileFloatingCTA() {
 
       {/* WhatsApp Floating CTA Button */}
       <a
-        href="https://wa.me/919876543210"
+        href="https://wa.me/918800185776"
         target="_blank"
         rel="noopener noreferrer"
         aria-label="Chat with NORYOKO on WhatsApp"

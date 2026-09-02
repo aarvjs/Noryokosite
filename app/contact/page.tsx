@@ -5,6 +5,14 @@ import Link from "next/link";
 import { ArrowRight, ArrowUpRight, CheckCircle2, Cpu, Mail, MapPin, Phone, Send, Sparkles } from "lucide-react";
 import FinalCTA from "@/components/sections/FinalCTA";
 
+function WhatsappIcon({ className = "w-4 h-4" }: { className?: string }) {
+  return (
+    <svg className={className} fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+      <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z" />
+    </svg>
+  );
+}
+
 // Carousel Images for Contact Hero
 const CONTACT_HERO_IMAGES = [
   "https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=1600&auto=format&fit=crop", // Engineering Team Collaboration
@@ -16,6 +24,7 @@ const CONTACT_HERO_IMAGES = [
 export default function ContactPage() {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [submitted, setSubmitted] = useState(false);
+  const [lastWaUrl, setLastWaUrl] = useState("");
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -39,7 +48,24 @@ export default function ContactPage() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+
+    // Compose formatted WhatsApp Message with all inquiry details
+    const textMessage =
+      `*NEW PROJECT INQUIRY — NORYOKO STUDIO*%0A%0A` +
+      `*Name:* ${encodeURIComponent(formData.name)}%0A` +
+      `*Email:* ${encodeURIComponent(formData.email)}%0A` +
+      `*Company:* ${encodeURIComponent(formData.company || "N/A")}%0A` +
+      `*Service Required:* ${encodeURIComponent(formData.projectType)}%0A` +
+      `*Budget Range:* ${encodeURIComponent(formData.budget)}%0A` +
+      `*Timeline:* ${encodeURIComponent(formData.timeline)}%0A` +
+      `*Project Overview:* ${encodeURIComponent(formData.message)}`;
+
+    const whatsappUrl = `https://wa.me/918800185776?text=${textMessage}`;
+    setLastWaUrl(whatsappUrl);
     setSubmitted(true);
+
+    // Redirect user to WhatsApp with pre-filled message
+    window.open(whatsappUrl, "_blank");
   };
 
   return (
@@ -99,7 +125,7 @@ export default function ContactPage() {
               <ArrowRight className="w-4 h-4 relative z-10" />
             </a>
             <a
-              href="mailto:hello@noryoko.com"
+              href="mailto:info@noryoko.com"
               className="btn-water-fill btn-water-fill-white inline-flex items-center gap-2 px-8 py-4 rounded-2xl bg-white/10 hover:text-slate-900 text-white font-medium text-xs tracking-wider uppercase border border-white/20 backdrop-blur-sm"
             >
               <div className="btn-water-bg" />
@@ -133,18 +159,32 @@ export default function ContactPage() {
           {/* Project Brief Form Container */}
           <div className="lg:col-span-7 p-8 sm:p-12 rounded-3xl bg-white border border-amber-200/80 shadow-[0_15px_40px_rgba(217,119,6,0.06)] space-y-6">
             {submitted ? (
-              <div className="p-8 rounded-2xl bg-amber-50 border border-amber-200 text-center space-y-4 animate-in fade-in duration-300">
-                <CheckCircle2 className="w-12 h-12 text-amber-700 mx-auto" />
-                <h3 className="text-2xl font-bold text-slate-900">Inquiry Received</h3>
-                <p className="text-slate-600 text-xs font-light max-w-md mx-auto">
-                  Thank you for reaching out to NORYOKO Studio. Our engineering architects will review your project brief and respond shortly.
+              <div className="p-8 rounded-2xl bg-emerald-50 border border-emerald-200 text-center space-y-5 animate-in fade-in duration-300">
+                <div className="w-14 h-14 rounded-full bg-emerald-600 text-white mx-auto flex items-center justify-center shadow-lg shadow-emerald-600/30">
+                  <WhatsappIcon className="w-7 h-7" />
+                </div>
+                <h3 className="text-2xl font-bold text-slate-900">Redirecting to WhatsApp...</h3>
+                <p className="text-slate-600 text-xs font-light max-w-md mx-auto leading-relaxed">
+                  Your inquiry details have been formatted and prepared for WhatsApp (+91 8800185776). If WhatsApp did not open automatically, click the button below:
                 </p>
-                <button
-                  onClick={() => setSubmitted(false)}
-                  className="text-xs font-mono text-amber-800 underline font-semibold"
-                >
-                  Send another inquiry
-                </button>
+
+                <div className="pt-2 flex flex-col sm:flex-row items-center justify-center gap-3">
+                  <a
+                    href={lastWaUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 px-6 py-3.5 rounded-2xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs tracking-wider uppercase shadow-md transition-all"
+                  >
+                    <WhatsappIcon className="w-4 h-4" />
+                    <span>Send via WhatsApp (+91 8800185776)</span>
+                  </a>
+                  <button
+                    onClick={() => setSubmitted(false)}
+                    className="px-6 py-3.5 rounded-2xl bg-white border border-amber-200 text-slate-800 font-semibold text-xs hover:bg-amber-50"
+                  >
+                    Edit Inquiry Form
+                  </button>
+                </div>
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="space-y-6">
@@ -210,7 +250,7 @@ export default function ContactPage() {
                       <option>Cloud & DevOps Infrastructure</option>
                       <option>UI/UX Product Design</option>
                       <option>SEO & Digital Growth</option>
-                      <option>Internship Application</option>
+                      <option>Career Application</option>
                     </select>
                   </div>
                 </div>
@@ -259,11 +299,11 @@ export default function ContactPage() {
 
                 <button
                   type="submit"
-                  className="btn-water-fill w-full py-4 px-8 rounded-full bg-slate-900 text-white font-medium text-xs tracking-wider uppercase flex items-center justify-center gap-2 shadow-lg"
+                  className="btn-water-fill w-full py-4 px-8 rounded-full bg-emerald-700 hover:bg-emerald-800 text-white font-medium text-xs tracking-wider uppercase flex items-center justify-center gap-2 shadow-lg shadow-emerald-700/20"
                 >
                   <div className="btn-water-bg" />
-                  <span className="relative z-10">Start a Conversation</span>
-                  <Send className="w-4 h-4 relative z-10" />
+                  <WhatsappIcon className="w-4 h-4 relative z-10" />
+                  <span className="relative z-10">Send Inquiry via WhatsApp (+91 8800185776)</span>
                 </button>
               </form>
             )}
@@ -285,11 +325,15 @@ export default function ContactPage() {
               <div className="space-y-4 pt-2">
                 <div className="flex items-center gap-3 text-xs text-slate-700">
                   <Mail className="w-4 h-4 text-amber-700" />
-                  <span className="font-mono">hello@noryoko.com</span>
+                  <a href="mailto:info@noryoko.com" className="font-mono font-bold hover:text-amber-800 transition-colors">
+                    info@noryoko.com
+                  </a>
                 </div>
                 <div className="flex items-center gap-3 text-xs text-slate-700">
                   <Phone className="w-4 h-4 text-amber-700" />
-                  <span className="font-mono">+91 (800) NORYOKO</span>
+                  <a href="tel:+918800185776" className="font-mono font-bold hover:text-amber-800 transition-colors">
+                    +91 8800185776
+                  </a>
                 </div>
                 <div className="flex items-center gap-3 text-xs text-slate-700">
                   <MapPin className="w-4 h-4 text-amber-700" />

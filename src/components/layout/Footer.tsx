@@ -28,11 +28,17 @@ export default function Footer() {
               NORYOKO is a digital engineering studio & product platform architect building resilient software, web applications, mobile platforms, and AI agent systems.
             </p>
 
-            <div className="space-y-2 pt-2 text-xs text-slate-600 font-mono">
+            <div className="space-y-2.5 pt-2 text-xs text-slate-600 font-mono">
               <div className="flex items-center gap-2">
                 <Mail className="w-3.5 h-3.5 text-amber-700" />
-                <a href="mailto:hello@noryoko.com" className="hover:text-amber-800 transition-colors">
-                  hello@noryoko.com
+                <a href="mailto:info@noryoko.com" className="hover:text-amber-800 transition-colors font-semibold">
+                  info@noryoko.com
+                </a>
+              </div>
+              <div className="flex items-center gap-2">
+                <Phone className="w-3.5 h-3.5 text-amber-700" />
+                <a href="tel:+918800185776" className="hover:text-amber-800 transition-colors font-semibold">
+                  +91 8800185776
                 </a>
               </div>
               <div className="flex items-center gap-2">

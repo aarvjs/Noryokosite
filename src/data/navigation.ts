@@ -5,12 +5,14 @@ export interface NavItem {
   badge?: string;
 }
 
-// EXACT NAVBAR ORDER: Home, About, Services, Internships, FAQ, Contact
+// EXACT NAVBAR ORDER: Home, About, Services, Product, Training, Career, FAQ, Contact
 export const MAIN_NAVIGATION: NavItem[] = [
   { label: "Home", href: "/" },
   { label: "About", href: "/about" },
   { label: "Services", href: "/services" },
-  { label: "Internships", href: "/internships" },
+  { label: "Product", href: "/product" },
+  { label: "Training", href: "/training" },
+  { label: "Career", href: "/careers" },
   { label: "FAQ", href: "/faq" },
   { label: "Contact", href: "/contact" },
 ];
@@ -64,8 +66,9 @@ export const FOOTER_NAVIGATION = {
   company: [
     { label: "About NORYOKO", href: "/about" },
     { label: "Services", href: "/services" },
+    { label: "Product", href: "/product" },
+    { label: "Training", href: "/training" },
     { label: "Careers", href: "/careers" },
-    { label: "Internships", href: "/internships" },
     { label: "FAQ", href: "/faq" },
     { label: "Contact Us", href: "/contact" },
   ],

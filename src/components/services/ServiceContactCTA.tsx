@@ -2,7 +2,7 @@
 
 import React from "react";
 import Link from "next/link";
-import { ArrowRight, Mail, MapPin, MessageSquare, Sparkles } from "lucide-react";
+import { ArrowRight, Mail, MapPin, MessageSquare, Phone, Sparkles } from "lucide-react";
 
 interface ServiceContactCTAProps {
   serviceTitle: string;
@@ -45,22 +45,29 @@ export default function ServiceContactCTA({ serviceTitle }: ServiceContactCTAPro
             <span className="relative z-10">Start a Project</span>
             <ArrowRight className="w-4 h-4 relative z-10" />
           </Link>
-          <Link
-            href="/contact"
+          <a
+            href="tel:+918800185776"
             className="btn-water-fill btn-water-fill-white inline-flex items-center gap-2 px-8 py-4 rounded-2xl bg-white hover:bg-amber-50 text-slate-900 font-medium text-xs tracking-wider uppercase border border-amber-200/80 shadow-sm"
           >
             <div className="btn-water-bg" />
-            <span className="relative z-10">Talk to Our Team</span>
-            <MessageSquare className="w-4 h-4 text-amber-700 relative z-10" />
-          </Link>
+            <span className="relative z-10">Call +91 8800185776</span>
+            <Phone className="w-4 h-4 text-amber-700 relative z-10" />
+          </a>
         </div>
 
         {/* Direct Contact & Location Info */}
         <div className="pt-8 border-t border-amber-200/60 flex flex-wrap items-center justify-center gap-6 text-xs font-mono text-slate-600">
           <div className="flex items-center gap-2">
             <Mail className="w-4 h-4 text-amber-700" />
-            <a href="mailto:hello@noryoko.com" className="hover:text-amber-800 transition-colors font-bold">
-              hello@noryoko.com
+            <a href="mailto:info@noryoko.com" className="hover:text-amber-800 transition-colors font-bold">
+              info@noryoko.com
+            </a>
+          </div>
+          <span className="text-amber-300">•</span>
+          <div className="flex items-center gap-2">
+            <Phone className="w-4 h-4 text-amber-700" />
+            <a href="tel:+918800185776" className="hover:text-amber-800 transition-colors font-bold">
+              +91 8800185776
             </a>
           </div>
           <span className="text-amber-300">•</span>
@@ -68,8 +75,6 @@ export default function ServiceContactCTA({ serviceTitle }: ServiceContactCTAPro
             <MapPin className="w-4 h-4 text-amber-700" />
             <span>Lucknow, Uttar Pradesh, India</span>
           </div>
-          <span className="text-amber-300">•</span>
-          <span className="text-amber-800 font-bold">Response within 24h</span>
         </div>
 
       </div>

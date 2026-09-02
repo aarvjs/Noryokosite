@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
-import { ArrowRight, Sparkles } from "lucide-react";
+import { ArrowRight, Mail, Phone, Sparkles } from "lucide-react";
 
 const CTA_CAROUSEL_IMAGES = [
   "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?q=80&w=1600&auto=format&fit=crop",
@@ -71,13 +71,27 @@ export default function FinalCTA() {
             <span className="relative z-10">Start a Project</span>
             <ArrowRight className="w-4 h-4 relative z-10" />
           </Link>
-          <Link
-            href="/services"
+          <a
+            href="tel:+918800185776"
             className="btn-water-fill btn-water-fill-white inline-flex items-center gap-2 px-8 py-4 rounded-2xl bg-white hover:bg-amber-50 text-slate-900 font-medium text-xs tracking-wider uppercase border border-amber-200/80 shadow-sm"
           >
             <div className="btn-water-bg" />
-            <span className="relative z-10">Explore Services</span>
-          </Link>
+            <span className="relative z-10">Call +91 8800185776</span>
+            <Phone className="w-4 h-4 text-amber-700 relative z-10" />
+          </a>
+        </div>
+
+        {/* Contact Info Footer Bar */}
+        <div className="pt-6 border-t border-amber-200/60 flex flex-wrap items-center justify-center gap-6 text-xs font-mono text-slate-600">
+          <a href="mailto:info@noryoko.com" className="flex items-center gap-1.5 hover:text-amber-800 transition-colors font-bold">
+            <Mail className="w-3.5 h-3.5 text-amber-700" />
+            <span>info@noryoko.com</span>
+          </a>
+          <span className="text-amber-300">•</span>
+          <a href="tel:+918800185776" className="flex items-center gap-1.5 hover:text-amber-800 transition-colors font-bold">
+            <Phone className="w-3.5 h-3.5 text-amber-700" />
+            <span>+91 8800185776</span>
+          </a>
         </div>
       </div>
     </section>
